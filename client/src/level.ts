@@ -6,12 +6,12 @@ import { Player } from "./player";
 import { PlayerState } from "../../server/src/rooms/schema/MyRoomState";
 
 export class Level extends Scene {
-    client = new Client("ws://localhost:2567");
+    // client = new Client("ws://localhost:2567");
+    client = new Client("wws://adventureland.onrender.com:10000");
     room?: Room;
     playerEntities: { [index: string]: Player; } = {};
 
     override async onInitialize(engine: Engine) {
-
         console.log("Joining room...");
 
         try {
