@@ -19,19 +19,19 @@ export class Level extends Scene {
             console.log("Joined successfully!");
 
             // Connect event handlers.
-            this.room.state.players.onAdd(this.handlePlayerJoined.bind(this));
-            this.room.state.players.onRemove(this.handlePlayerLeft.bind(this));
-            engine.input.pointers.primary.on("down", this.handleClick.bind(this));
+            // this.room.state.players.onAdd(this.handlePlayerJoined.bind(this));
+            // this.room.state.players.onRemove(this.handlePlayerLeft.bind(this));
+            // engine.input.pointers.primary.on("down", this.handleClick.bind(this));
 
+            this.room.state.onStateChange((state: MyRoomState) => {
+                console.log("new state:", state);
+            });
         } catch (e) {
             console.error(e);
         }
 
 
         // Listen for changes to the room state.
-        // this.room.state.onStateChange((state: MyRoomState) => {
-        //     console.log("new state:", state);
-        // });
 
 
 
