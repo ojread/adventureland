@@ -7,7 +7,7 @@ import { Player } from "./player";
 
 export class Level extends Scene {
     // client = new Client("ws://localhost:2567");
-    client = new Client("wws://adventureland.onrender.com:2567");
+    client = new Client("wws://adventureland.onrender.com");
     room?: Room;
     playerEntities: { [index: string]: Player; } = {};
 

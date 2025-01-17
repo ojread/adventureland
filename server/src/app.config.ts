@@ -21,7 +21,7 @@ export default config({
     },
 
     initializeExpress: (app) => {
-        app.use(cors);
+        app.use(cors());
         app.use(express.json());
 
         const frontend = path.join(__dirname, "../../client/dist");
