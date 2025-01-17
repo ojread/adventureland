@@ -3,11 +3,11 @@ import { Engine, PointerEvent, Scene, SpriteSheet, TileMap } from "excalibur";
 
 import { Player } from "./player";
 
-import type { MyRoomState, PlayerState } from "../../server/src/rooms/schema/MyRoomState";
+import { MyRoomState, PlayerState } from "../../server/src/rooms/schema/MyRoomState";
 
 export class Level extends Scene {
-    client = new Client("wws://localhost:2567");
-    // client = new Client("wws://adventureland.onrender.com:2567");
+    // client = new Client("ws://localhost:2567");
+    client = new Client("wws://adventureland.onrender.com:2567");
     room?: Room;
     playerEntities: { [index: string]: Player; } = {};
 
@@ -15,7 +15,7 @@ export class Level extends Scene {
         console.log("Joining room...");
 
         try {
-            this.room = await this.client.joinOrCreate<MyRoomState>("my_room");
+            this.room = await this.client.joinOrCreate("my_room", {}, MyRoomState);
             console.log("Joined successfully!");
 
             // Connect event handlers.
