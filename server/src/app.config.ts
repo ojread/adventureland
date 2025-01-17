@@ -1,6 +1,8 @@
 import config from "@colyseus/tools";
 import { monitor } from "@colyseus/monitor";
 import { playground } from "@colyseus/playground";
+import express from "express";
+import path from "path";
 
 /**
  * Import your Room files
@@ -18,6 +20,9 @@ export default config({
     },
 
     initializeExpress: (app) => {
+        const frontend = path.join(__dirname, "../../client/dist");
+        app.use(express.static(frontend));
+
         /**
          * Bind your custom express routes here:
          * Read more: https://expressjs.com/en/starter/basic-routing.html
@@ -30,9 +35,9 @@ export default config({
          * Use @colyseus/playground
          * (It is not recommended to expose this route in a production environment)
          */
-        if (process.env.NODE_ENV !== "production") {
-            app.use("/", playground);
-        }
+        // if (process.env.NODE_ENV !== "production") {
+        //     app.use("/", playground);
+        // }
 
         /**
          * Use @colyseus/monitor
