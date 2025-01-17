@@ -3,7 +3,7 @@ import { Engine, PointerEvent, Scene, SpriteSheet, TileMap } from "excalibur";
 
 import { Player } from "./player";
 
-import { MyRoomState, PlayerState } from "../../server/src/rooms/schema/MyRoomState";
+// import { MyRoomState, PlayerState } from "../../server/src/rooms/schema/MyRoomState";
 
 export class Level extends Scene {
     // client = new Client("ws://localhost:2567");
@@ -15,7 +15,7 @@ export class Level extends Scene {
         console.log("Joining room...");
 
         try {
-            this.room = await this.client.joinOrCreate("my_room", {}, MyRoomState);
+            this.room = await this.client.joinOrCreate("my_room");
             console.log("Joined successfully!");
 
             // Connect event handlers.
@@ -23,7 +23,7 @@ export class Level extends Scene {
             // this.room.state.players.onRemove(this.handlePlayerLeft.bind(this));
             // engine.input.pointers.primary.on("down", this.handleClick.bind(this));
 
-            this.room.state.onStateChange((state: MyRoomState) => {
+            this.room.state.onStateChange((state: any) => {
                 console.log("new state:", state);
             });
         } catch (e) {
