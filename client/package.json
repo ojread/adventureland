@@ -17,6 +17,7 @@
     "vite": "^6.0.7"
   },
   "dependencies": {
+    "@colyseus/schema": "^2.0.36",
     "colyseus.js": "^0.15.26",
     "excalibur": "^0.30.3"
   }
