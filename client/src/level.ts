@@ -71,6 +71,7 @@ export class Level extends Scene {
         // this.add(tilemap);
     }
 
+    /*
     // Add new players to the scene.
     handlePlayerJoined(playerState: PlayerState, sessionId: string) {
         console.log("A player has joined! Their unique session id is", sessionId);
@@ -112,4 +113,5 @@ export class Level extends Scene {
             this.room.send("moveTo", { x: event.worldPos.x, y: event.worldPos.y });
         }
     }
+        */
 }
