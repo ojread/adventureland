@@ -2,6 +2,7 @@ import config from "@colyseus/tools";
 import { monitor } from "@colyseus/monitor";
 import { playground } from "@colyseus/playground";
 import express from "express";
+import cors from "cors";
 import path from "path";
 
 /**
@@ -20,6 +21,9 @@ export default config({
     },
 
     initializeExpress: (app) => {
+        app.use(cors);
+        app.use(express.json());
+
         const frontend = path.join(__dirname, "../../client/dist");
         app.use(express.static(frontend));
 
