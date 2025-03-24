@@ -7,12 +7,12 @@ import { TiledResource } from "@excaliburjs/plugin-tiled";
 // import map1Url from "/maps/map1.json?url";
 
 const game = new ex.Engine({
-    width: 480,
-    height: 480,
+    width: 320,
+    height: 320,
     backgroundColor: ex.Color.fromHex("#000000"),
     pixelArt: true,
     pixelRatio: 2,
-    displayMode: ex.DisplayMode.FitScreen,
+    displayMode: ex.DisplayMode.FitScreenAndFill,
 });
 
 // Load assets
@@ -22,7 +22,9 @@ const loader = new ex.Loader();
 const tileSheetSource = new ex.ImageSource("/assets/tiles.png");
 loader.addResource(tileSheetSource);
 
-const tiledMap = new TiledResource("/maps/map1.json");
+const tiledMap = new TiledResource("/maps/map1.json", {
+    useTilemapCameraStrategy: true
+});
 loader.addResource(tiledMap);
 
 class Player extends ex.Actor {
@@ -77,6 +79,9 @@ game.start(loader).then(() => {
     // Add the player sprite to the player actor
     player.graphics.use(tileSheet.getSprite(25, 0));
     game.add(player);
+
+    // Camera follows player
+    game.currentScene.camera.strategy.elasticToActor(player, 0.1, 0.9);
 
     // Subscribe to the primary pointer
     game.input.pointers.primary.on('down', function (event) {
