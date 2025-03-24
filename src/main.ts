@@ -2,17 +2,16 @@ import * as ex from "excalibur";
 import { ExcaliburAStar } from "@excaliburjs/plugin-pathfinding";
 import { TiledResource } from "@excaliburjs/plugin-tiled";
 
-import tilesheetUrl from "/assets/tiles.png";
+// import tilesheetUrl from "/assets/tiles.png";
 
-import map1Url from "/maps/map1.json?url";
+// import map1Url from "/maps/map1.json?url";
 
 const game = new ex.Engine({
     width: 480,
     height: 480,
-    // viewport: { width: 400, height: 300 },
     backgroundColor: ex.Color.fromHex("#000000"),
     pixelArt: true,
-    pixelRatio: 3,
+    pixelRatio: 2,
     displayMode: ex.DisplayMode.FitScreen,
 });
 
@@ -20,10 +19,10 @@ const game = new ex.Engine({
 const loader = new ex.Loader();
 
 // Load the tile sheet
-const tileSheetSource = new ex.ImageSource(tilesheetUrl);
+const tileSheetSource = new ex.ImageSource("/assets/tiles.png");
 loader.addResource(tileSheetSource);
 
-const tiledMap = new TiledResource(map1Url);
+const tiledMap = new TiledResource("/maps/map1.json");
 loader.addResource(tiledMap);
 
 class Player extends ex.Actor {
@@ -42,8 +41,23 @@ game.start(loader).then(() => {
 
     tiledMap.addToScene(game.currentScene);
 
-    const solidMapLayers = tiledMap.getLayersByProperty("solid", true);
-    const tilemap = solidMapLayers[0].tilemap as ex.TileMap;
+    const solidLayers = tiledMap.getLayersByProperty("solid", true);
+
+    // Check a solid layer was found
+    if (solidLayers.length === 0) {
+        console.error('No solid layers found in the map');
+        return;
+    }
+
+    // Type-safe way to access the tilemap
+    const solidLayer = solidLayers[0];
+    if (!('tilemap' in solidLayer)) {
+        console.error('The solid layer is not a tile layer');
+        return;
+    }
+
+    // Now TypeScript knows this is a TileMap
+    const tilemap = solidLayer.tilemap as ex.TileMap;
     const graph = new ExcaliburAStar(tilemap);
 
     // Create a sprite sheet
@@ -83,5 +97,3 @@ game.start(loader).then(() => {
         }
     });
 });
-
-game.start();
