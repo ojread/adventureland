@@ -2,10 +2,6 @@ import * as ex from "excalibur";
 import { ExcaliburAStar } from "@excaliburjs/plugin-pathfinding";
 import { TiledResource } from "@excaliburjs/plugin-tiled";
 
-// import tilesheetUrl from "/assets/tiles.png";
-
-// import map1Url from "/maps/map1.json?url";
-
 const game = new ex.Engine({
     width: 320,
     height: 320,
@@ -22,8 +18,8 @@ const loader = new ex.Loader();
 const tileSheetSource = new ex.ImageSource("/assets/tiles.png");
 loader.addResource(tileSheetSource);
 
-const tiledMap = new TiledResource("/maps/map1.json", {
-    useTilemapCameraStrategy: true
+const tiledMap = new TiledResource("/maps/world.json", {
+    // useTilemapCameraStrategy: true
 });
 loader.addResource(tiledMap);
 
@@ -81,7 +77,7 @@ game.start(loader).then(() => {
     game.add(player);
 
     // Camera follows player
-    game.currentScene.camera.strategy.elasticToActor(player, 0.1, 0.9);
+    game.currentScene.camera.strategy.elasticToActor(player, 0.1, 0.5);
 
     // Subscribe to the primary pointer
     game.input.pointers.primary.on('down', function (event) {

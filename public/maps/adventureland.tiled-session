@@ -3,26 +3,52 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "map1.json",
     "expandedProjectPaths": [
+        "."
     ],
     "fileStates": {
+        "map1.json": {
+            "scale": 1.40125,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 240.14272970561996,
+                "y": 239.78590544157
+            }
+        },
+        "tileset.json": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
         "tileset.xml": {
             "scaleInDock": 1,
             "scaleInEditor": 1
+        },
+        "world.json": {
+            "scale": 1.3328,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 3.3763505402160945,
+                "y": 24.759903961584598
+            }
         }
     },
     "last.imagePath": "/Users/ollie/Projects/js/adventureland/public/maps",
+    "map.fixedSize": false,
     "map.height": 30,
     "map.lastUsedFormat": "json",
     "map.layerDataFormat": "3",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
     "openFiles": [
+        "tileset.json",
+        "map1.json"
     ],
     "project": "adventureland.tiled-project",
     "property.type": "bool",
     "recentFiles": [
+        "tileset.json",
+        "map1.json",
         "tileset.xml"
     ],
     "tileset.lastUsedFormat": "json",
