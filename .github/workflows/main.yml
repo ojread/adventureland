@@ -1,9 +1,11 @@
+name: Build
+
 on:
   - push
   - pull_request
 
 jobs:
-  cache-and-install:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,3 +20,6 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
+
+      - name: Build project
+        run: pnpm run build
