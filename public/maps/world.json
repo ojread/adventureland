@@ -84,7 +84,7 @@
         {
          "chunks":[
                 {
-                 "data":"eJxjYBgF1ARyzBAsz4ydTYz+aEYEfyqQnQzEKYzE6ydHjpr6+4FuncCIXY4Y\/djCjNjwGwWkAQARCQXX",
+                 "data":"eJyLYGQYBVQEcswQLM+MnU2M\/mikOJkKZCcDcQoj8frJkaOm\/n6gWydgSVfE6scWZsSG3yggDQAAdRcGMA==",
                  "height":16,
                  "width":16,
                  "x":0,
@@ -125,7 +125,7 @@
                  "visible":true,
                  "width":16,
                  "x":112,
-                 "y":144
+                 "y":128
                 }],
          "opacity":1,
          "type":"objectgroup",

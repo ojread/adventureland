@@ -15,8 +15,9 @@ const game = new ex.Engine({
 const loader = new ex.Loader();
 
 // Load the tile sheet
-const tileSheetSource = new ex.ImageSource("/assets/tiles.png");
-loader.addResource(tileSheetSource);
+// Not currently needed.
+// const tileSheetSource = new ex.ImageSource("/assets/tiles.png");
+// loader.addResource(tileSheetSource);
 
 const tiledMap = new TiledResource("/maps/world.json", {
     entityClassNameFactories: {
@@ -65,15 +66,16 @@ game.start(loader).then(() => {
     const graph = new ExcaliburAStar(tilemap);
 
     // Create a sprite sheet
-    const tileSheet = ex.SpriteSheet.fromImageSource({
-        image: tileSheetSource,
-        grid: {
-            columns: 49,
-            rows: 22,
-            spriteHeight: 16,
-            spriteWidth: 16
-        }
-    });
+    // Everything's being loaded through the tiled map currently.
+    // const tileSheet = ex.SpriteSheet.fromImageSource({
+    //     image: tileSheetSource,
+    //     grid: {
+    //         columns: 49,
+    //         rows: 22,
+    //         spriteHeight: 16,
+    //         spriteWidth: 16
+    //     }
+    // });
 
     // Look up the player entity.
     const player = tiledMap.getEntitiesByName("player")[0] as Player;
@@ -85,12 +87,16 @@ game.start(loader).then(() => {
     game.input.pointers.primary.on('down', function (event) {
         const startTile = tilemap.getTileByPoint(player.pos);
         const endTile = tilemap.getTileByPoint(event.coordinates.worldPos);
+
         if (startTile && endTile) {
+            // Clear previous actions first
+            player.actions.clearActions();
+
             const startNode = graph.getNodeByCoord(startTile.x, startTile.y);
             const endNode = graph.getNodeByCoord(endTile.x, endTile.y);
             const path = graph.astar(startNode, endNode);
 
-            player.actions.clearActions();
+            // Convert path to movement actions
             for (const step of path) {
                 const tile = tilemap.getTile(step.x, step.y);
                 if (tile) {
@@ -98,7 +104,9 @@ game.start(loader).then(() => {
                 }
             }
 
+            // Explicitly clean up
             graph.resetGrid();
+            path.length = 0; // Clear the path array
         }
     });
 });

@@ -4,6 +4,7 @@
  "imagewidth":784,
  "margin":0,
  "name":"tileset",
+ "objectalignment":"topleft",
  "spacing":0,
  "tilecount":1078,
  "tiledversion":"1.11.2",
