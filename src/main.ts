@@ -1,6 +1,6 @@
 import * as ex from "excalibur";
 import { ExcaliburAStar } from "@excaliburjs/plugin-pathfinding";
-import { TiledResource } from "@excaliburjs/plugin-tiled";
+import { FactoryProps, TiledResource } from "@excaliburjs/plugin-tiled";
 
 const game = new ex.Engine({
     width: 320,
@@ -19,7 +19,13 @@ const tileSheetSource = new ex.ImageSource("/assets/tiles.png");
 loader.addResource(tileSheetSource);
 
 const tiledMap = new TiledResource("/maps/world.json", {
-    // useTilemapCameraStrategy: true
+    entityClassNameFactories: {
+        "player": (props: FactoryProps) => {
+            return new Player(
+                props.worldPos
+            );
+        }
+    }
 });
 loader.addResource(tiledMap);
 
@@ -69,12 +75,8 @@ game.start(loader).then(() => {
         }
     });
 
-    // Create a player actor
-    const player = new Player(ex.vec(100, 100));
-
-    // Add the player sprite to the player actor
-    player.graphics.use(tileSheet.getSprite(25, 0));
-    game.add(player);
+    // Look up the player entity.
+    const player = tiledMap.getEntitiesByName("player")[0] as Player;
 
     // Camera follows player
     game.currentScene.camera.strategy.elasticToActor(player, 0.1, 0.5);
@@ -92,9 +94,11 @@ game.start(loader).then(() => {
             for (const step of path) {
                 const tile = tilemap.getTile(step.x, step.y);
                 if (tile) {
-                    player.actions.moveTo(tile.center, 100);
+                    player.actions.moveTo(tile.pos, 100);
                 }
             }
+
+            graph.resetGrid();
         }
     });
 });
