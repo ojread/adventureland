@@ -1,5 +1,5 @@
 import * as ex from "excalibur";
-import { ExcaliburAStar } from "@excaliburjs/plugin-pathfinding";
+// import { ExcaliburAStar } from "@excaliburjs/plugin-pathfinding";
 import { TiledResource } from "@excaliburjs/plugin-tiled";
 
 const game = new ex.Engine({
