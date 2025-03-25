@@ -1,6 +1,6 @@
 import * as ex from "excalibur";
 import { ExcaliburAStar } from "@excaliburjs/plugin-pathfinding";
-import { FactoryProps, TiledResource } from "@excaliburjs/plugin-tiled";
+import { TiledResource } from "@excaliburjs/plugin-tiled";
 
 const game = new ex.Engine({
     width: 320,
@@ -196,8 +196,8 @@ game.start(loader).then(() => {
     }
 
     // Now TypeScript knows this is a TileMap
-    const tilemap = solidLayer.tilemap as ex.TileMap;
-    const graph = new ExcaliburAStar(tilemap);
+    // const tilemap = solidLayer.tilemap as ex.TileMap;
+    // const graph = new ExcaliburAStar(tilemap);
 
     // Create and add the movement system
     // const movementSystem = new MovementSystem(game.);
