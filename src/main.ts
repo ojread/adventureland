@@ -1,5 +1,5 @@
 import * as ex from "excalibur";
-// import { ExcaliburAStar } from "@excaliburjs/plugin-pathfinding";
+import { ExcaliburAStar } from "@excaliburjs/plugin-pathfinding";
 import { TiledResource } from "@excaliburjs/plugin-tiled";
 
 const game = new ex.Engine({
@@ -95,26 +95,31 @@ loader.addResource(tiledMap);
 // }
 
 class MoveCommand extends ex.Component {
-    public readonly type = "movement-command";
+    public readonly type = "move_command";
 
     constructor(public target: ex.Vector, public speed: number = 100) {
         super();
     }
 }
 
-export class Movable extends ex.Component {
+class Movable extends ex.Component {
     public readonly type = "movable";
 
     constructor(public speed: number = 100) {
         super();
     }
 }
-export class MovementSystem extends ex.System {
-    query: ex.Query<typeof MoveCommand | typeof Movable>;
 
-    constructor(world: ex.World) {
+class MovementSystem extends ex.System {
+    query: ex.Query<typeof MoveCommand | typeof Movable>;
+    private graph: ExcaliburAStar;
+    private tilemap: ex.TileMap;
+
+    constructor(world: ex.World, graph: ExcaliburAStar, tilemap: ex.TileMap) {
         super();
         this.query = world.query([Movable, MoveCommand]);
+        this.graph = graph;
+        this.tilemap = tilemap;
     }
 
     public systemType = ex.SystemType.Update;
@@ -122,63 +127,52 @@ export class MovementSystem extends ex.System {
     public update(delta: number) {
         for (let entity of this.query.entities) {
             const target = entity.get(MoveCommand).target;
+            // const movable = entity.get(Movable);
             const actor = entity as ex.Actor;
-            actor.actions.clearActions();
-            actor.actions.moveTo(target, 100);
+
+            const startTile = this.tilemap.getTileByPoint(actor.pos);
+            const endTile = this.tilemap.getTileByPoint(target);
+
+            if (startTile && endTile) {
+
+                const startNode = this.graph.getNodeByCoord(startTile.x, startTile.y);
+                const endNode = this.graph.getNodeByCoord(endTile.x, endTile.y);
+
+                if (startNode && endNode) {
+                    const path = this.graph.astar(startNode, endNode);
+                    actor.actions.clearActions();
+
+                    // Move along the path
+                    for (const step of path) {
+                        const targetPos = this.tilemap.getTile(step.x, step.y)?.pos;
+
+                        // const distance = actor.pos.distance(targetPos);
+                        const duration = 100;
+                        if (targetPos) {
+                            actor.actions.moveTo(targetPos, duration);
+                        }
+                    }
+
+                    // Clean up
+                    this.graph.resetGrid();
+                }
+            }
+
             entity.removeComponent(MoveCommand);
         }
     }
-
-    // query: ex.Query<typeof Movable | MoveCommand>(["A", "B"]);
-
-    // public readonly types = ["movable", "movement-command"] as const;
-    // public systemType = ex.SystemType.Update;
-
-    // private graph: ExcaliburAStar;
-
-    // constructor(private tilemap: ex.TileMap) {
-    //     super();
-    //     this.graph = new ExcaliburAStar(tilemap);
-    // }
-
-    // public update(delta: number): void {
-    //     for (const entity of this.  .query.entities) {
-    //         const command = entity.get(MoveCommand);
-    //         if (command) {
-    //             this.processMovement(entity, command);
-    //             entity.removeComponent(MoveCommand); // Remove after processing
-    //         }
-    //     }
-    // }
-
-    // private processMovement(entity: ex.Actor, command: MoveCommand): void {
-    //     const startTile = this.tilemap.getTileByPoint(entity.pos);
-    //     const endTile = this.tilemap.getTileByPoint(command.target);
-
-    //     if (startTile && endTile) {
-    //         entity.actions.clearActions();
-
-    //         const startNode = this.graph.getNodeByCoord(startTile.x, startTile.y);
-    //         const endNode = this.graph.getNodeByCoord(endTile.x, endTile.y);
-    //         const path = this.graph.astar(startNode, endNode);
-
-    //         for (const step of path) {
-    //             const tile = this.tilemap.getTile(step.x, step.y);
-    //             if (tile) {
-    //                 entity.actions.moveTo(tile.pos, command.speed);
-    //             }
-    //         }
-
-    //         this.graph.resetGrid();
-    //     }
-    // }
 }
 
 // Start the game after loading assets
 game.start(loader).then(() => {
     // Once assets are loaded, create a scene and add sprites
 
+    // Add this to see collision boxes
+    // game.currentScene.engine.showDebug(true);
+
     tiledMap.addToScene(game.currentScene);
+    // tiledMap.getMap()?.pos = ex.Vector.Zero; //
+    // console.log(tiledMap.layerConfig);
 
     const solidLayers = tiledMap.getLayersByProperty("solid", true);
 
@@ -195,13 +189,20 @@ game.start(loader).then(() => {
         return;
     }
 
+    // Get the solid layer's tilemap
+    const tilemap = solidLayer.tilemap as ex.TileMap;
+
+    // Create the pathfinding graph
+    const graph = new ExcaliburAStar(tilemap);
+    console.log(solidLayer);
+
     // Now TypeScript knows this is a TileMap
     // const tilemap = solidLayer.tilemap as ex.TileMap;
     // const graph = new ExcaliburAStar(tilemap);
 
     // Create and add the movement system
-    // const movementSystem = new MovementSystem(game.);
-    game.currentScene.world.add(MovementSystem);
+    const movementSystem = new MovementSystem(game.currentScene.world, graph, tilemap);
+    game.currentScene.world.add(movementSystem);
 
     // Create a sprite sheet
     // Everything's being loaded through the tiled map currently.

@@ -5,34 +5,6 @@
         {
          "chunks":[
                 {
-                 "data":"eJxjZGBgYBzFo3gUj0gMAAYeAQE=",
-                 "height":16,
-                 "width":16,
-                 "x":-16,
-                 "y":-16
-                }, 
-                {
-                 "data":"eJxjZGBgYBzFo3gUj0gMAAYeAQE=",
-                 "height":16,
-                 "width":16,
-                 "x":0,
-                 "y":-16
-                }, 
-                {
-                 "data":"eJxjZGBgYBzFo3gUj0gMAAYeAQE=",
-                 "height":16,
-                 "width":16,
-                 "x":16,
-                 "y":-16
-                }, 
-                {
-                 "data":"eJxjZGBgYBzFo3gUj0gMAAYeAQE=",
-                 "height":16,
-                 "width":16,
-                 "x":-16,
-                 "y":0
-                }, 
-                {
                  "data":"eJxjZGBgYBzFgwoL4MAjRT86PsA4cHHBhkYTg5nwqGciw2585hHSR8g+APBeA0w=",
                  "height":16,
                  "width":16,
@@ -45,13 +17,6 @@
                  "width":16,
                  "x":16,
                  "y":0
-                }, 
-                {
-                 "data":"eJxjZGBgYBzFo3gUj0gMAAYeAQE=",
-                 "height":16,
-                 "width":16,
-                 "x":-16,
-                 "y":16
                 }, 
                 {
                  "data":"eJxjZGBgYCSA2YhQM4pH8SgeehgAGWoBBg==",
@@ -69,15 +34,15 @@
                 }],
          "compression":"zlib",
          "encoding":"base64",
-         "height":48,
+         "height":32,
          "id":1,
          "name":"Ground",
          "opacity":1,
-         "startx":-16,
-         "starty":-16,
+         "startx":0,
+         "starty":0,
          "type":"tilelayer",
          "visible":true,
-         "width":48,
+         "width":32,
          "x":0,
          "y":0
         }, 
@@ -92,7 +57,7 @@
                 }],
          "compression":"zlib",
          "encoding":"base64",
-         "height":48,
+         "height":16,
          "id":2,
          "name":"Solid",
          "opacity":1,
@@ -102,11 +67,11 @@
                  "type":"bool",
                  "value":true
                 }],
-         "startx":-16,
-         "starty":-16,
+         "startx":0,
+         "starty":0,
          "type":"tilelayer",
          "visible":true,
-         "width":48,
+         "width":16,
          "x":0,
          "y":0
         }, 
