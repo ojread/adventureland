@@ -5,7 +5,7 @@
         {
          "chunks":[
                 {
-                 "data":"eJxjZGBgYBzFgwoL4MAjRT86PsA4cHHBhkYTg5nwqGciw2585hHSR8g+APBeA0w=",
+                 "data":"eJxjZGBgYBzFVMcHGMnXK4ADjxT91AxLSjEbGk0MZsKjnokMu\/GZR0gfIfsA7nsEDA==",
                  "height":16,
                  "width":16,
                  "x":0,
@@ -49,15 +49,22 @@
         {
          "chunks":[
                 {
-                 "data":"eJyLYGQYBVQEcswQLM+MnU2M\/mikOJkKZCcDcQoj8frJkaOm\/n6gWydgSVfE6scWZsSG3yggDQAAdRcGMA==",
+                 "data":"eJyLYGQYBVQEcswQjMyWZ0YVJ6Q\/GilOpgLZyUCcwki8fnLkcKnpYQTjBlL09wP1TMCSrojVjy3MiA2\/UUAaAAAWAQeo",
                  "height":16,
                  "width":16,
                  "x":0,
                  "y":0
+                }, 
+                {
+                 "data":"eJxjYBgFo2AUjESwnomBAQAGwgCy",
+                 "height":16,
+                 "width":16,
+                 "x":16,
+                 "y":16
                 }],
          "compression":"zlib",
          "encoding":"base64",
-         "height":16,
+         "height":32,
          "id":2,
          "name":"Solid",
          "opacity":1,
@@ -71,7 +78,7 @@
          "starty":0,
          "type":"tilelayer",
          "visible":true,
-         "width":16,
+         "width":32,
          "x":0,
          "y":0
         }, 
@@ -98,11 +105,11 @@
                  "id":2,
                  "name":"chicken",
                  "rotation":0,
-                 "type":"npc",
+                 "type":"character",
                  "visible":true,
                  "width":16,
-                 "x":128,
-                 "y":208
+                 "x":144,
+                 "y":240
                 }],
          "opacity":1,
          "type":"objectgroup",

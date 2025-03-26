@@ -18,6 +18,9 @@ export default class MovementSystem extends System {
 
     public update(delta: number) {
         for (let entity of this.query.entities) {
+            // Remove the command so this only runs once.
+            entity.removeComponent(MoveCommand);
+
             const target = entity.get(MoveCommand).target;
             // const movable = entity.get(Movable);
             const actor = entity as Actor;
@@ -25,7 +28,10 @@ export default class MovementSystem extends System {
             const startTile = this.tilemap.getTileByPoint(actor.pos);
             const endTile = this.tilemap.getTileByPoint(target);
 
-            if (startTile && endTile) {
+            console.log(endTile);
+
+            // Check we have two different tiles.
+            if (startTile && endTile && startTile != endTile) {
 
                 const startNode = this.graph.getNodeByCoord(startTile.x, startTile.y);
                 const endNode = this.graph.getNodeByCoord(endTile.x, endTile.y);
@@ -49,8 +55,6 @@ export default class MovementSystem extends System {
                     this.graph.resetGrid();
                 }
             }
-
-            entity.removeComponent(MoveCommand);
         }
     }
 }
