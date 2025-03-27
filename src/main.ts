@@ -46,7 +46,7 @@ game.start(loader).then(() => {
     // Once assets are loaded, create a scene and add sprites
 
     // Add this to see collision boxes
-    game.currentScene.engine.showDebug(true);
+    // game.currentScene.engine.showDebug(true);
 
     // Add the tiled world to the scene.
     tiledMap.addToScene(game.currentScene);
@@ -139,6 +139,17 @@ game.start(loader).then(() => {
     game.input.pointers.primary.on('up', function (event) {
         // What have we clicked on?
         // Hard to find the target from here it seems.
+
+        /* Ideas
+        Interaction is part of movement - bump an object to use it.
+        Part of stepping along the path is checking for objects.
+
+        Actors listen for click events and attach a click component.
+        Systems can react to this and handle the interaction.
+
+        I think I prefer the former. Fairly simple. How would it handle
+        attacking an enemy though?
+        */
 
         const player = tiledMap.getEntitiesByName("player")[0];
         if (player) {
