@@ -1,11 +1,11 @@
 // src/systems/interactionSystem.ts
 import * as ex from "excalibur";
-import { Character, Dialog } from "./components";
+import { Dialog } from "./actors";
+import { Character } from "./components";
 
 export default class InteractionSystem extends ex.System {
     query: ex.Query<typeof Character>;
 
-    public readonly types = ["npc"] as const;
     private dialog: Dialog;
     // private currentCharacter: ex.Entity | null = null;
 

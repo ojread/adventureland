@@ -2,14 +2,15 @@ import * as ex from "excalibur";
 import { ExcaliburAStar } from "@excaliburjs/plugin-pathfinding";
 import { TiledResource } from "@excaliburjs/plugin-tiled";
 
-import { Character, Dialog, MoveCommand, Movable } from "./lib/components";
+import { Dialog } from "./lib/actors";
+import { Character, MoveCommand, Movable } from "./lib/components";
 import InteractionSystem from "./lib/interaction-system";
 import MovementSystem from "./lib/movement-system";
 
 const game = new ex.Engine({
     width: 256,
     height: 256,
-    backgroundColor: ex.Color.fromHex("#000000"),
+    backgroundColor: ex.Color.Black,
     pixelArt: true,
     pixelRatio: 3,
     displayMode: ex.DisplayMode.FitScreenAndFill,
@@ -48,16 +49,23 @@ game.start(loader).then(() => {
     // Add this to see collision boxes
     // game.currentScene.engine.showDebug(true);
 
+    // Add dialog UI
+    const dialog = new Dialog();
+    game.currentScene.add(dialog);
+
+    const ui = new ex.ScreenElement({
+        x: 10, y: 10, width: 10, height: 10
+    });
+    game.add(ui);
+
     // Add the tiled world to the scene.
     tiledMap.addToScene(game.currentScene);
 
     // Add the interaction system
-    const interactionSystem = new InteractionSystem(game.currentScene.world);
-    game.currentScene.world.add(interactionSystem);
+    // const interactionSystem = new InteractionSystem(game.currentScene.world);
+    // game.currentScene.world.add(interactionSystem);
 
-    // Add dialog UI
-    const dialog = new Dialog();
-    game.currentScene.add(dialog);
+
 
     // Add character component to the chicken.
     const chicken = tiledMap.getEntitiesByName("chicken")[0];
@@ -133,7 +141,8 @@ game.start(loader).then(() => {
 
 
     // Camera follows player
-    game.currentScene.camera.strategy.elasticToActor(player, 0.1, 0.5);
+    game.currentScene.camera.strategy.lockToActor(player);
+    // game.currentScene.camera.strategy.elasticToActor(player, 0.1, 0.5);
 
     // Subscribe to the primary pointer
     game.input.pointers.primary.on('up', function (event) {
@@ -149,6 +158,13 @@ game.start(loader).then(() => {
 
         I think I prefer the former. Fairly simple. How would it handle
         attacking an enemy though?
+
+        I'm looking at building a command queue but can excalibur's actions
+        do what I need? How do you interact with another entity, bring uo
+        the dialog window and converse with them?
+
+        Do I abstract it slightly and queue up commands on an abstract
+        controller entity, which orders the player around, opens dialog?
         */
 
         const player = tiledMap.getEntitiesByName("player")[0];

@@ -28,7 +28,7 @@ export default class MovementSystem extends System {
             const startTile = this.tilemap.getTileByPoint(actor.pos);
             const endTile = this.tilemap.getTileByPoint(target);
 
-            console.log(endTile);
+            // console.log(endTile);
 
             // Check we have two different tiles.
             if (startTile && endTile && startTile != endTile) {
