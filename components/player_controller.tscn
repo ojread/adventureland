@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://x13262xwnlde"]
+
+[ext_resource type="Script" uid="uid://uw6cy38jualt" path="res://components/player_controller.gd" id="1_a5dsc"]
+
+[node name="PlayerController" type="Node2D" groups=["PlayerController"]]
+script = ExtResource("1_a5dsc")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+target_desired_distance = 4.0
+debug_enabled = true

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://2yqpo2jqwqgn"]
+
+[ext_resource type="Texture2D" uid="uid://djr77ejyamr0l" path="res://assets/colored_packed.png" id="1_h035e"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7uh2j"]
+resource_local_to_scene = true
+atlas = ExtResource("1_h035e")
+region = Rect2(384, 0, 16, 16)
+
+[node name="Sprite" type="Sprite2D"]
+texture = SubResource("AtlasTexture_7uh2j")
