@@ -37,6 +37,9 @@ speed = 75.0
 texture = SubResource("AtlasTexture_qfnet")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
 
 [node name="Actor" parent="." instance=ExtResource("4_k0juu")]
 position = Vector2(88, 88)
