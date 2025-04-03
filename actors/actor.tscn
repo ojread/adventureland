@@ -5,14 +5,20 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_8lauh"]
 radius = 7.0
 
-[node name="Actor" type="CharacterBody2D"]
+[node name="Actor" type="CharacterBody2D" groups=["Actor"]]
+input_pickable = true
 motion_mode = 1
 script = ExtResource("1_7uh2j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8lauh")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 8.0
 target_desired_distance = 4.0
 path_postprocessing = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_8lauh")
+[node name="AttackTimer" type="Timer" parent="."]
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

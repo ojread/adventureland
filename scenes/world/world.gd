@@ -1,13 +1,41 @@
 extends Node2D
 
-var astar_grid : AStarGrid2D
-
 @onready var map = $Map
+
+#var clicked_actor: Actor
+
+var selected_actors: Array[Actor] = []
 
 func _ready():
 	# Component methods can be called like this
 	#get_tree().call_group("PlayerController", "hello", "there")
-	pass
+	
+	# Listen for clicks on actors.
+	for child in get_children():
+		if child is Actor:
+			#child.connect("clicked", _on_actor_clicked)
+			child.connect("mouse_entered_actor", _on_mouse_entered_actor)
+			child.connect("mouse_exited_actor", _on_mouse_exited_actor)
+
+func _process(delta: float) -> void:
+	var tree = get_tree()
+	var damage_components = tree.get_nodes_in_group("Damage")
+	for damage_component in damage_components:
+		damage_component.actor.receive_damage(damage_component.damage)
+		#damage_component.actor.hp -= damage_component.damage
+		#if damage_component.actor.hp <= 0:
+			#damage_component.actor.queue_free()
+		#else:
+		damage_component.queue_free()
+	
+	# Check for deaths.
+	# Is this inefficient to run every frame?
+	var actors = tree.get_nodes_in_group("Actor")
+	for actor in actors:
+		if actor.hp <= 0:
+			# Deselect it if necessary.
+			_on_mouse_exited_actor(actor)
+			actor.queue_free()
 
 
 # Get player input and decide what to do with it.
@@ -19,14 +47,25 @@ func _ready():
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.is_released() and event.button_index == MOUSE_BUTTON_LEFT:
-			var global_mouse_pos = get_global_mouse_position()
-			var map_coords = map.local_to_map(global_mouse_pos)
 			
-			if map.cell_is_interactive(map_coords):
-				map.interact_with_cell(map_coords)
+			#var selected_actors = get_tree().get_nodes_in_group("Selected").map(func(component):
+				#return component.get_parent()
+			#)
+			if selected_actors:
+				var selected_actor = selected_actors.front()
+				# Move player towards actor and interact when in range.
+				get_tree().call_group("PlayerController", "attack_actor", selected_actor)
+				#print(selected_actor)
 			else:
-				# Move the player towards the clicked point.
-				get_tree().call_group("PlayerController", "move_to", global_mouse_pos)
+			
+				var global_mouse_pos = get_global_mouse_position()
+				var map_coords = map.local_to_map(global_mouse_pos)
+				
+				if map.cell_is_interactive(map_coords):
+					map.interact_with_cell(map_coords)
+				else:
+					# Move the player towards the clicked point.
+					get_tree().call_group("PlayerController", "move_to", global_mouse_pos)
 			
 			# The tilemap has to be at 0,0 or this will need offsetting.
 			#var map_coords = map.local_to_map(event.position)
@@ -40,4 +79,16 @@ func _input(event):
 				# AI brains need to be provided with any external input such as 
 				# what tiles and entities it can see etc.
 				# An entity can't just get all that info itself.
-				
+
+# Actors need brains, state machines or something to handle deciding an overall
+# intention, turning that into individual instructions and then folloing them.
+# You have to move into range of something to interact.
+# And if the target moves, update the instructions to follow.
+
+func _on_mouse_entered_actor(actor: Actor):
+	selected_actors.append(actor)
+
+func _on_mouse_exited_actor(actor: Actor):
+	var index = selected_actors.find(actor)
+	if index > -1:
+		selected_actors.remove_at(index)
