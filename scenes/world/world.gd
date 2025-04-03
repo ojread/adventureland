@@ -18,6 +18,8 @@ func _process(delta: float) -> void:
 	# Character controllers receive things that they're aware of.
 	# It might be better to handle clicks here so I know the order of things.
 	
+	
+	
 	var tree = get_tree()
 	var damage_components = tree.get_nodes_in_group("Damage")
 	for damage_component in damage_components:

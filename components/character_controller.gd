@@ -17,7 +17,7 @@ func _ready() -> void:
 	_wait()
 
 func _wait() -> void:
-	timer.wait_time = randf_range(1.0, 2.0)
+	timer.wait_time = randf_range(2.0, 5.0)
 	timer.connect("timeout", _wander)
 	timer.start()
 
