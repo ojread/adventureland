@@ -2,14 +2,10 @@ extends Node2D
 
 @onready var map = $Map
 
-#var clicked_actor: Actor
-
 var selected_actors: Array[Actor] = []
+var targeted_actor: Actor
 
 func _ready():
-	# Component methods can be called like this
-	#get_tree().call_group("PlayerController", "hello", "there")
-	
 	# Listen for clicks on actors.
 	for child in get_children():
 		if child is Actor:
@@ -18,6 +14,10 @@ func _ready():
 			child.connect("mouse_exited_actor", _on_mouse_exited_actor)
 
 func _process(delta: float) -> void:
+	# Run all the "systems" that update each frame.
+	# Character controllers receive things that they're aware of.
+	# It might be better to handle clicks here so I know the order of things.
+	
 	var tree = get_tree()
 	var damage_components = tree.get_nodes_in_group("Damage")
 	for damage_component in damage_components:
@@ -35,7 +35,14 @@ func _process(delta: float) -> void:
 		if actor.hp <= 0:
 			# Deselect it if necessary.
 			_on_mouse_exited_actor(actor)
+			targeted_actor = null
 			actor.queue_free()
+	
+	if targeted_actor:
+		$Target.position = targeted_actor.position
+		$Target.visible = true
+	else:
+		$Target.visible = false
 
 
 # Get player input and decide what to do with it.
@@ -55,6 +62,7 @@ func _input(event):
 				var selected_actor = selected_actors.front()
 				# Move player towards actor and interact when in range.
 				get_tree().call_group("PlayerController", "attack_actor", selected_actor)
+				targeted_actor = selected_actor
 				#print(selected_actor)
 			else:
 			
