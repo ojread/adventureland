@@ -25,4 +25,4 @@ func _wander() -> void:
 	# Move to a point near the start position.
 	var x = randf_range(start_pos.x - wander_range, start_pos.x + wander_range)
 	var y = randf_range(start_pos.y - wander_range, start_pos.y + wander_range)
-	actor.set_movement_target(Vector2(x, y))
+	actor.set_target_position(Vector2(x, y))

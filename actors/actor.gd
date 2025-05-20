@@ -4,8 +4,10 @@ class_name Actor
 # Methods useful for all actors in the game
 
 # Allow the game to track what we're clicking.
+signal clicked(actor: Actor)
 signal mouse_entered_actor(actor: Actor)
 signal mouse_exited_actor(actor: Actor)
+signal die(actor: Actor)
 
 @export var speed := 50.0
 @export var hp := 10
@@ -13,8 +15,9 @@ signal mouse_exited_actor(actor: Actor)
 @export var attack := 2
 @export var attack_range := 16
 @export var attack_speed := 1
+@export var target_actor: Actor = null
 
-@onready var nav: NavigationAgent2D = $NavigationAgent2D # change if needed
+@onready var nav: NavigationAgent2D = $NavigationAgent2D
 
 var health_bar_start_pos = Vector2(-8, -8)
 var health_bar_end_pos = Vector2(8, -8)
@@ -35,13 +38,16 @@ func _draw_health_bar() -> void:
 func _physics_process(delta: float) -> void:
 	_move()
 
-func set_movement_target(target: Vector2):
+func set_target_position(target: Vector2):
 	nav.target_position = target
+
+func set_target_actor(target: Actor):
+	target_actor = target
 
 func receive_damage(damage: int):
 	hp -= damage
-	#if hp <= 0:
-		#queue_free()
+	if hp <= 0:
+		die.emit(self)
 	queue_redraw()
 
 func _move() -> void:
@@ -68,8 +74,8 @@ func _move() -> void:
 func _velocity_computed(safe_velocity: Vector2):
 	velocity = safe_velocity
 
-func _on_mouse_entered() -> void:
-	mouse_entered_actor.emit(self)
-
-func _on_mouse_exited() -> void:
-	mouse_exited_actor.emit(self)
+func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
+	if event.is_action_pressed("click"):
+		viewport.set_input_as_handled()
+		#print("actor clicked")
+		clicked.emit(self)

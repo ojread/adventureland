@@ -15,11 +15,6 @@ resource_local_to_scene = true
 atlas = ExtResource("7_j2gmx")
 region = Rect2(400, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_j2gmx"]
-resource_local_to_scene = true
-atlas = ExtResource("7_j2gmx")
-region = Rect2(416, 112, 16, 16)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_gb53w"]
 resource_local_to_scene = true
 atlas = ExtResource("7_j2gmx")
@@ -30,6 +25,11 @@ resource_local_to_scene = true
 atlas = ExtResource("7_j2gmx")
 region = Rect2(416, 96, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2gmx"]
+resource_local_to_scene = true
+atlas = ExtResource("7_j2gmx")
+region = Rect2(416, 112, 16, 16)
+
 [node name="World" type="Node2D"]
 script = ExtResource("1_4wyf3")
 
@@ -39,47 +39,47 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAA
 tile_set = ExtResource("2_4wyf3")
 script = ExtResource("3_bq33v")
 
-[node name="Player" parent="." instance=ExtResource("4_k0juu")]
+[node name="Player" parent="Map" instance=ExtResource("4_k0juu")]
 position = Vector2(152, 160)
 speed = 75.0
 hp = 16
 max_hp = 16
 
-[node name="PlayerController" parent="Player" instance=ExtResource("4_71j4m")]
+[node name="PlayerController" parent="Map/Player" instance=ExtResource("4_71j4m")]
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
+[node name="Camera2D" type="Camera2D" parent="Map/Player"]
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 
-[node name="Sprite" parent="Player" instance=ExtResource("5_71j4m")]
+[node name="Sprite" parent="Map/Player" instance=ExtResource("5_71j4m")]
 texture = SubResource("AtlasTexture_1yooq")
 
-[node name="Chicken" parent="." instance=ExtResource("4_k0juu")]
+[node name="Skelly" parent="Map" instance=ExtResource("4_k0juu")]
+position = Vector2(264, 280)
+
+[node name="Sprite" parent="Map/Skelly" instance=ExtResource("5_71j4m")]
+texture = SubResource("AtlasTexture_gb53w")
+
+[node name="CharacterController" parent="Map/Skelly" instance=ExtResource("8_1yooq")]
+
+[node name="Ghosty" parent="Map" instance=ExtResource("4_k0juu")]
+position = Vector2(248, 264)
+
+[node name="Sprite" parent="Map/Ghosty" instance=ExtResource("5_71j4m")]
+texture = SubResource("AtlasTexture_5qq27")
+
+[node name="CharacterController" parent="Map/Ghosty" instance=ExtResource("8_1yooq")]
+
+[node name="Chicken" parent="Map" instance=ExtResource("4_k0juu")]
 position = Vector2(104, 96)
 attack = 1
 
-[node name="Sprite" parent="Chicken" instance=ExtResource("5_71j4m")]
+[node name="Sprite" parent="Map/Chicken" instance=ExtResource("5_71j4m")]
 texture = SubResource("AtlasTexture_j2gmx")
 
-[node name="CharacterController" parent="Chicken" instance=ExtResource("8_1yooq")]
-
-[node name="Skelly" parent="." instance=ExtResource("4_k0juu")]
-position = Vector2(264, 280)
-
-[node name="Sprite" parent="Skelly" instance=ExtResource("5_71j4m")]
-texture = SubResource("AtlasTexture_gb53w")
-
-[node name="CharacterController" parent="Skelly" instance=ExtResource("8_1yooq")]
+[node name="CharacterController" parent="Map/Chicken" instance=ExtResource("8_1yooq")]
 
 [node name="Target" type="Sprite2D" parent="."]
 visible = false
 texture = ExtResource("8_j2gmx")
-
-[node name="Ghosty" parent="." instance=ExtResource("4_k0juu")]
-position = Vector2(248, 264)
-
-[node name="Sprite" parent="Ghosty" instance=ExtResource("5_71j4m")]
-texture = SubResource("AtlasTexture_5qq27")
-
-[node name="CharacterController" parent="Ghosty" instance=ExtResource("8_1yooq")]

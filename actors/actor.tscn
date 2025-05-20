@@ -19,6 +19,3 @@ target_desired_distance = 4.0
 path_postprocessing = 1
 
 [node name="AttackTimer" type="Timer" parent="."]
-
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

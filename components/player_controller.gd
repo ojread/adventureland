@@ -8,14 +8,11 @@ var DamageComponent = preload("res://components/damage.tscn")
 var state := "idle"
 var target: Actor
 
-func move_to(target: Vector2):
-	actor.set_movement_target(target)
-
 func attack_actor(_target: Actor):
 	state = "attack"
 	target = _target
 	print("Attacking ", target.name)
-	actor.set_movement_target(target.position)
+	actor.set_target_position(target.position)
 
 func _process(delta: float) -> void:
 	if state == "attack" and target:
