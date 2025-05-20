@@ -1,5 +1,6 @@
 extends TileMapLayer
 
+# Object of tile names to ids.
 var tile_names = {}
 
 func _ready():

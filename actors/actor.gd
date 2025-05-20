@@ -21,7 +21,7 @@ var health_bar_end_pos = Vector2(8, -8)
 
 var can_attack: bool = true
 
-func _process(delta: float) ->void:
+func _process(_delta: float) ->void:
 	# Move toward the target actor if set.
 	if target_actor:
 		set_target_position(target_actor.position, true)
@@ -42,7 +42,7 @@ func _draw_health_bar() -> void:
 		draw_line(health_bar_start_pos, health_bar_mid_pos, Color.GREEN, 1)
 		draw_line(health_bar_mid_pos, health_bar_end_pos, Color.RED, 1)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	# If we're at the target, stop
 	if nav.is_navigation_finished():
 		return
@@ -84,10 +84,10 @@ func receive_damage(damage: int):
 		die.emit(self)
 	queue_redraw()
 
-func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
+func _input_event(viewport: Viewport, event: InputEvent, _shape_idx: int) -> void:
 	if event.is_action_pressed("click"):
+		print("actor clicked")
 		viewport.set_input_as_handled()
-		#print("actor clicked")
 		clicked.emit(self)
 
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:

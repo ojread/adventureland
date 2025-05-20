@@ -36,6 +36,7 @@ func _ready():
 func _unhandled_input(event: InputEvent) -> void:
 	# Handle clicks on the map.
 	if event.is_action_pressed("click"):
+		print("world clicked")
 		var global_mouse_pos = get_global_mouse_position()
 		var map_coords = map.local_to_map(global_mouse_pos)
 		
