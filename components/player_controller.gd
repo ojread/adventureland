@@ -1,7 +1,7 @@
 extends Node
 class_name PlayerControllerComponent
 
-var DamageComponent = preload("res://components/damage.tscn")
+#var DamageComponent = preload("res://components/damage.tscn")
 
 @onready var actor: Actor = get_parent()
 

@@ -3,7 +3,6 @@ extends Node2D
 @onready var map = $Map
 
 var selected_actors: Array[Actor] = []
-var targeted_actor: Actor
 var player: Actor
 
 func _ready():
@@ -15,20 +14,11 @@ func _ready():
 			child.connect("clicked", on_actor_clicked)
 			child.connect("die", on_actor_died)
 
-func _process(delta: float) -> void:
+#func _process(delta: float) -> void:
 	# Run all the "systems" that update each frame.
 	# Character controllers receive things that they're aware of.
 	# It might be better to handle clicks here so I know the order of things.
-	
-	var tree = get_tree()
-	var damage_components = tree.get_nodes_in_group("Damage")
-	for damage_component in damage_components:
-		damage_component.actor.receive_damage(damage_component.damage)
-		#damage_component.actor.hp -= damage_component.damage
-		#if damage_component.actor.hp <= 0:
-			#damage_component.actor.queue_free()
-		#else:
-		damage_component.queue_free()
+
 	
 	# Show crosshair over target - doesn't look great.
 	#if targeted_actor:
@@ -75,11 +65,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func on_actor_clicked(actor: Actor):
 	# Move player towards actor and interact when in range.
-	#get_tree().call_group("PlayerController", "attack_actor", actor)
-	player.set_target_actor(actor)
-	targeted_actor = actor
+	# Don't target yourself.
+	if actor != player:
+		player.set_target_actor(actor)
 	
 func on_actor_died(actor: Actor):
-	if targeted_actor == actor:
-		targeted_actor = null
 	actor.queue_free()

@@ -3,10 +3,7 @@ class_name Actor
 
 # Methods useful for all actors in the game
 
-# Allow the game to track what we're clicking.
 signal clicked(actor: Actor)
-signal mouse_entered_actor(actor: Actor)
-signal mouse_exited_actor(actor: Actor)
 signal die(actor: Actor)
 
 @export var speed := 50.0
@@ -77,7 +74,9 @@ func set_target_position(target: Vector2, is_actor: bool = false):
 		nav.target_desired_distance = 4
 
 func set_target_actor(target: Actor):
-	target_actor = target
+	# Don't target yourself!
+	if target_actor != self:
+		target_actor = target
 
 func receive_damage(damage: int):
 	hp -= damage

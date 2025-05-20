@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dibkb2x6pfq4r"]
-
-[ext_resource type="Script" uid="uid://cmm4bunwe2aur" path="res://components/damage.gd" id="1_xfosd"]
-
-[node name="Damage" type="Node" groups=["Damage"]]
-script = ExtResource("1_xfosd")

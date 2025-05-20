@@ -4,5 +4,6 @@
 
 [node name="CharacterController" type="Node" groups=["CharacterController"]]
 script = ExtResource("1_joakw")
+wander_range = 64
 
 [node name="Timer" type="Timer" parent="."]

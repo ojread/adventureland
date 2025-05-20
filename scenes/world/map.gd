@@ -3,9 +3,7 @@ extends TileMapLayer
 var tile_names = {}
 
 func _ready():
-	#await get_tree().process_frame
 	_init_tile_names()
-	#print(tile_names)
 
 func _init_tile_names():
 	var source: TileSetAtlasSource = tile_set.get_source(0)
