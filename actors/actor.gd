@@ -22,8 +22,18 @@ signal die(actor: Actor)
 var health_bar_start_pos = Vector2(-8, -8)
 var health_bar_end_pos = Vector2(8, -8)
 
-func _ready() -> void:
-	nav.velocity_computed.connect(_velocity_computed)
+var can_attack: bool = true
+
+func _process(delta: float) ->void:
+	# Move toward the target actor if set.
+	if target_actor:
+		set_target_position(target_actor.position, true)
+		
+		if position.distance_to(target_actor.position) < attack_range:
+			if can_attack:
+				target_actor.receive_damage(attack)
+				can_attack = false
+				$AttackTimer.start(1)
 
 func _draw() -> void:
 	_draw_health_bar()
@@ -36,21 +46,6 @@ func _draw_health_bar() -> void:
 		draw_line(health_bar_mid_pos, health_bar_end_pos, Color.RED, 1)
 
 func _physics_process(delta: float) -> void:
-	_move()
-
-func set_target_position(target: Vector2):
-	nav.target_position = target
-
-func set_target_actor(target: Actor):
-	target_actor = target
-
-func receive_damage(damage: int):
-	hp -= damage
-	if hp <= 0:
-		die.emit(self)
-	queue_redraw()
-
-func _move() -> void:
 	# If we're at the target, stop
 	if nav.is_navigation_finished():
 		return
@@ -66,16 +61,39 @@ func _move() -> void:
 	if nav.avoidance_enabled:
 		nav.set_velocity(new_velocity)
 	else:
-		_velocity_computed(new_velocity)
+		_on_navigation_agent_2d_velocity_computed(new_velocity)
 
 	# Do the movement
 	move_and_slide()
 
-func _velocity_computed(safe_velocity: Vector2):
-	velocity = safe_velocity
+func set_target_position(target: Vector2, is_actor: bool = false):
+	# Tell the navigation agent to move toward the position.
+	nav.target_position = target
+	
+	# Desired distance from target is different for actors.
+	if is_actor:
+		nav.target_desired_distance = 16
+	else:
+		nav.target_desired_distance = 4
+
+func set_target_actor(target: Actor):
+	target_actor = target
+
+func receive_damage(damage: int):
+	hp -= damage
+	if hp <= 0:
+		die.emit(self)
+	queue_redraw()
 
 func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
 	if event.is_action_pressed("click"):
 		viewport.set_input_as_handled()
 		#print("actor clicked")
 		clicked.emit(self)
+
+func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
+	velocity = safe_velocity
+
+func _on_attack_timer_timeout() -> void:
+	# Ready to attack.
+	can_attack = true

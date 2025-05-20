@@ -75,7 +75,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func on_actor_clicked(actor: Actor):
 	# Move player towards actor and interact when in range.
-	get_tree().call_group("PlayerController", "attack_actor", actor)
+	#get_tree().call_group("PlayerController", "attack_actor", actor)
 	player.set_target_actor(actor)
 	targeted_actor = actor
 	

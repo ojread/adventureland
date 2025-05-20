@@ -19,3 +19,6 @@ target_desired_distance = 4.0
 path_postprocessing = 1
 
 [node name="AttackTimer" type="Timer" parent="."]
+
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
