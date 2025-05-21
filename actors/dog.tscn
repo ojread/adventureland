@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3 uid="uid://dex1bflk84ykr"]
+
+[ext_resource type="PackedScene" uid="uid://cpt740r17ray8" path="res://lib/actor.tscn" id="1_rj50d"]
+[ext_resource type="PackedScene" uid="uid://2yqpo2jqwqgn" path="res://lib/sprite.tscn" id="2_yuekb"]
+[ext_resource type="Texture2D" uid="uid://coxelqiujw4kk" path="res://assets/colored-transparent_packed.png" id="3_evh70"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8q2ld"]
+resource_local_to_scene = true
+atlas = ExtResource("3_evh70")
+region = Rect2(496, 112, 16, 16)
+
+[node name="Dog" instance=ExtResource("1_rj50d")]
+
+[node name="Sprite" parent="." index="3" instance=ExtResource("2_yuekb")]
+texture = SubResource("AtlasTexture_8q2ld")
