@@ -27,7 +27,7 @@ func _ready() -> void:
 
 func _on_entity_clicked(entity: GridEntity):
 	#print(entity.name)
-	if not Dialogic.current_timeline:
+	if entity.timeline.length() > 0 and not Dialogic.current_timeline:
 		Dialogic.start(entity.timeline)
 		#Dialogic.start(entity.name as String)
 		#print(entity.dialogic_timeline, " ", entity.dialogic_character)
