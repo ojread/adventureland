@@ -1186,11 +1186,14 @@ region_rect = Rect2(192, 160, 16, 16)
 [node name="LordAlan" parent="Level" instance=ExtResource("2_sl2e5")]
 position = Vector2(192, 176)
 region_rect = Rect2(448, 48, 16, 16)
+timeline = "LordAlan"
 
 [node name="Sally" parent="Level" instance=ExtResource("2_sl2e5")]
 position = Vector2(96, 192)
 region_rect = Rect2(336, 112, 16, 16)
+timeline = "Sally"
 
 [node name="Bob" parent="Level" instance=ExtResource("2_sl2e5")]
 position = Vector2(304, 288)
 region_rect = Rect2(368, 128, 16, 16)
+timeline = "Bob"
