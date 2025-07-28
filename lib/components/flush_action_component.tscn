@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7583vs40rnfs"]
+
+[ext_resource type="Script" uid="uid://cql712tmphwbh" path="res://lib/components/flush_action_component.gd" id="1_8t04l"]
+
+[node name="FlushActionComponent" type="Node"]
+script = ExtResource("1_8t04l")

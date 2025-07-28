@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dswsislcttjx"]
+
+[ext_resource type="PackedScene" uid="uid://bdd5dcwvio6q" path="res://lib/grid_entity/grid_entity.tscn" id="1_el8xj"]
+
+[node name="Larry" instance=ExtResource("1_el8xj")]
+region_rect = Rect2(480, 96, 16, 16)

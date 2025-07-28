@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://xmfrgiigfhnk"]
+
+[ext_resource type="Script" uid="uid://yyhxj2h16dyj" path="res://lib/components/dialogic_component.gd" id="1_reohr"]
+
+[node name="DialogicComponent" type="Node"]
+script = ExtResource("1_reohr")
+metadata/_custom_type_script = "uid://dpr7i76xr5yo2"
