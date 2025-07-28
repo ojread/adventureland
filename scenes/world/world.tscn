@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://345g4d4n1vkg"]
+[gd_scene load_steps=10 format=4 uid="uid://345g4d4n1vkg"]
 
 [ext_resource type="Script" uid="uid://ewvym6dq566b" path="res://scenes/world/world.gd" id="1_1fp7r"]
 [ext_resource type="Texture2D" uid="uid://b3xqwjldxynqb" path="res://assets/tilesheet.png" id="1_dphjl"]
@@ -7,8 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://by2jpy7nw5ess" path="res://lib/components/wander_component.tscn" id="5_v5dby"]
 [ext_resource type="PackedScene" uid="uid://ckqugkbpgh4xx" path="res://lib/components/sleep_action_component.tscn" id="6_bq33v"]
 [ext_resource type="PackedScene" uid="uid://b7583vs40rnfs" path="res://lib/components/flush_action_component.tscn" id="7_bq33v"]
-[ext_resource type="Resource" uid="uid://dbran4pdplo65" path="res://dialog/Bob.dtl" id="8_1yooq"]
-[ext_resource type="Resource" uid="uid://qm6fnlmhuqt5" path="res://dialog/Bob.dch" id="9_gb53w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sl2e5"]
 texture = ExtResource("1_dphjl")
@@ -1196,5 +1194,3 @@ region_rect = Rect2(336, 112, 16, 16)
 [node name="Bob" parent="Level" instance=ExtResource("2_sl2e5")]
 position = Vector2(304, 288)
 region_rect = Rect2(368, 128, 16, 16)
-dialogic_timeline = ExtResource("8_1yooq")
-dialogic_character = ExtResource("9_gb53w")

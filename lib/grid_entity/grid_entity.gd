@@ -2,10 +2,10 @@ class_name GridEntity extends Sprite2D
 
 # An entity that lives on the grid with all the common functionality included.
 
-@export var timeline: String
+#@export var timeline: String
 
-@export var dialogic_timeline: DialogicTimeline
-@export var dialogic_character: DialogicCharacter
+#@export var dialogic_timeline: DialogicTimeline
+#@export var dialogic_character: DialogicCharacter
 
 var moving: bool = false
 
