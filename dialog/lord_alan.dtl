@@ -1,6 +1,8 @@
-join LordAlan center
+join LordAlan left [animation="Bounce In"]
 LordAlan: A-ha and welcome to my humble castle, I am Lord Alan. Are you looking for something?
 - What is there to do around here?
-	You can go out and chase that skeleton off  for me please!
+	update LordAlan [animation="Heartbeat"]
+	LordAlan: You can go out and chase that skeleton off  for me please!
 - Please can I use your toilet?
-	Yes but make sure you flush it please!
+	LordAlan: Yes but make sure you flush it please!
+	leave LordAlan [animation="Bounce Out" wait="true"]

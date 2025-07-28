@@ -1,8 +1,8 @@
 extends Control
 
-@onready var panel_title = $HBoxContainer/PanelContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/Title
-@onready var buttons = $HBoxContainer/PanelContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/Buttons
-@onready var feedback = $HBoxContainer/PanelContainer/Panel/MarginContainer/VBoxContainer/Feedback
+#@onready var panel_title = $HBoxContainer/PanelContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/Title
+#@onready var buttons = $HBoxContainer/PanelContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/Buttons
+#@onready var feedback = $HBoxContainer/PanelContainer/Panel/MarginContainer/VBoxContainer/Feedback
 
 """
 UI concepts
@@ -26,7 +26,7 @@ func _ready() -> void:
 	Events.entity_clicked.connect(_on_entity_clicked)
 
 func _on_entity_clicked(entity: GridEntity):
-	#print(entity.name)
+	#print(entity.name, " ", entity.timeline)
 	if entity.timeline.length() > 0 and not Dialogic.current_timeline:
 		Dialogic.start(entity.timeline)
 		#Dialogic.start(entity.name as String)

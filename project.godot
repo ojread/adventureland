@@ -25,16 +25,18 @@ Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 
 directories/dch_directory={
 "Bob": "res://dialog/Bob.dch",
+"LadySonja": "res://dialog/LadySonja.dch",
 "LordAlan": "res://dialog/lord_alan.dch",
 "Sally": "res://dialog/Sally.dch"
 }
 directories/dtl_directory={
 "Bob": "res://dialog/Bob.dtl",
+"LadySonja": "res://assets/LadySonja.dtl",
 "LordAlan": "res://dialog/lord_alan.dtl",
 "Sally": "res://dialog/Sally.dtl"
 }
-layout/style_list=["res://dialog/my_style.tres", "res://assets/bubble.tres"]
-layout/default_style="res://dialog/my_style.tres"
+layout/style_list=["res://assets/visual_novel.tres"]
+layout/default_style="res://assets/visual_novel.tres"
 variables={}
 glossary/default_case_sensitive=true
 extensions_folder="res://addons/dialogic_additions"
