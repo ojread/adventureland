@@ -1,4 +1,4 @@
-join LadySonja right [animation="Slide In Down"]
+join LadySonja right [animation="Slide In Right"]
 LadySonja: Oi! What are you doing in here? Get out of our castle! People keep coming in to use our toilet!
 join LordAlan left [animation="Slide In Left"]
 LordAlan: Hey are you here to go on quests for us?
