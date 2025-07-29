@@ -2,6 +2,7 @@ class_name GridEntity extends Sprite2D
 
 # An entity that lives on the grid with all the common functionality included.
 
+@export var solid: bool = true
 @export var timeline: String
 
 #@export var dialogic_timeline: DialogicTimeline
@@ -15,13 +16,21 @@ var moving: bool = false
 # Entities live directly under the level/tilemap. Best not to need this?
 @onready var level: Level = get_parent()
 
-# Set this and the level will move us toward the target.
-@onready var movement_target: Vector2i = grid
+# Set either of these targets and the level will move us.
+@onready var target_grid: Vector2i = grid
+@onready var target_entity: GridEntity = null
 
 # Call to start following a new path to the target grid position.
-func path_to(target: Vector2i) -> void:
-	movement_target = target
-	Events.entity_movement_target_changed.emit(self)
+func set_target_grid(new_target_grid: Vector2i) -> void:
+	target_grid = new_target_grid
+	target_entity = null
+	Events.entity_target_grid_changed.emit(self)
+
+# Call to move towards an entity and interact with it.
+func set_target_entity(new_target_entity: GridEntity) -> void:
+	target_entity = new_target_entity
+	target_grid = grid
+	Events.entity_target_entity_changed.emit(self)
 
 # Slide entity to the target position.
 func move_to(target: Vector2i) -> void:
@@ -34,3 +43,8 @@ func move_to(target: Vector2i) -> void:
 		moving = false
 		Events.entity_movement_ended.emit(self)
 	)
+
+# Immediately place at the grid position.
+func place_at(grid_position: Vector2i):
+	grid = grid_position
+	position = grid * Globals.tile_size

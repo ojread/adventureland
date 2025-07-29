@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Adventureland"
-run/main_scene="uid://cp0p2k7lqgl58"
+run/main_scene="uid://345g4d4n1vkg"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -31,7 +31,7 @@ directories/dch_directory={
 }
 directories/dtl_directory={
 "Bob": "res://dialog/Bob.dtl",
-"LadySonja": "res://assets/LadySonja.dtl",
+"LadySonja": "res://dialog/LadySonja.dtl",
 "LordAlan": "res://dialog/lord_alan.dtl",
 "Sally": "res://dialog/Sally.dtl"
 }

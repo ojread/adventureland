@@ -29,5 +29,5 @@ func wander() -> void:
 	var dx = randi_range(-wander_distance, wander_distance)
 	var dy = randi_range(-wander_distance, wander_distance)
 	var wander_target = initial_grid + Vector2i(dx, dy)
-	entity.path_to(wander_target)
+	entity.set_target_grid(wander_target)
 	

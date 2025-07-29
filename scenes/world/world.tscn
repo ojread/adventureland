@@ -1,9 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://345g4d4n1vkg"]
+[gd_scene load_steps=2 format=3 uid="uid://345g4d4n1vkg"]
 
 [ext_resource type="Script" uid="uid://ewvym6dq566b" path="res://scenes/world/world.gd" id="1_1fp7r"]
-[ext_resource type="PackedScene" uid="uid://dlucu6jjjukpy" path="res://lib/level/level.tscn" id="2_sl2e5"]
 
 [node name="World" type="Node2D"]
+scale = Vector2(4, 4)
 script = ExtResource("1_1fp7r")
-
-[node name="Level" parent="." instance=ExtResource("2_sl2e5")]

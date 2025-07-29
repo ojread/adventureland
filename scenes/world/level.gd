@@ -14,8 +14,10 @@ func _ready() -> void:
 	init_entities()
 	
 	# Connect entity signals through the event bus.
-	Events.entity_movement_target_changed.connect(move_entity)
-	Events.entity_movement_ended.connect(move_entity)
+	# All of these trigger an update to check for movement.
+	Events.entity_target_grid_changed.connect(update_entity)
+	Events.entity_target_entity_changed.connect(update_entity)
+	Events.entity_movement_ended.connect(update_entity)
 
 func init_tiles() -> void:
 	for cell in get_used_cells():
@@ -27,14 +29,22 @@ func init_entities() -> void:
 	entities = {}
 	for child in get_children():
 		if child is GridEntity:
-			nav.set_point_solid(child.grid, true)
+			nav.set_point_solid(child.grid, child.solid)
 			entities[child.grid] = child
 
 # Attempt to move the entity, updating the dictionary and astargrid.
-func move_entity(entity: GridEntity) -> void:
-	if not entity.moving and entity.movement_target != entity.grid:
-		var path = get_nav_path(entity.grid, entity.movement_target)
-		if path.size() > 0:
+# Could be targetting an entity or grid position.
+func update_entity(entity: GridEntity) -> void:
+	if not entity.moving:
+		var path
+		if entity.target_entity:
+			path = get_nav_path(entity.grid, entity.target_entity.grid)
+			if path.size() == 0 and entity.grid.distance_to(entity.target_entity.grid) <= 1:
+				# We can't get any closer to the target entity.
+				Events.entity_bumped.emit(entity.target_entity)
+		elif entity.target_grid != entity.grid:
+			path = get_nav_path(entity.grid, entity.target_grid)
+		if path and path.size() > 0:
 			nav.set_point_solid(entity.grid, false)
 			entities[entity.grid] = null
 			nav.set_point_solid(path[0], true)
@@ -57,5 +67,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		if entities.has(cell) and entities[cell] != null:
 			Events.entity_clicked.emit(entities[cell])
 		else:
-			$Player.path_to(cell)
+			Events.level_clicked.emit(cell)
+			#$Player.path_to(cell)
 		get_viewport().set_input_as_handled()
