@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckqugkbpgh4xx"]
+
+[ext_resource type="Script" uid="uid://c0fod0e5ai0y0" path="res://lib/components/sleep_action_component.gd" id="1_hdn2h"]
+
+[node name="SleepActionComponent" type="Node"]
+script = ExtResource("1_hdn2h")
+metadata/_custom_type_script = "uid://dpr7i76xr5yo2"

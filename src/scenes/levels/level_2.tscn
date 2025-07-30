@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=4 uid="uid://bgvyjxr56pwcx"]
+
+[ext_resource type="PackedScene" uid="uid://dlucu6jjjukpy" path="res://lib/level/level.tscn" id="1_j2425"]
+[ext_resource type="PackedScene" uid="uid://bdd5dcwvio6q" path="res://lib/grid_entity/grid_entity.tscn" id="2_ra442"]
+[ext_resource type="PackedScene" uid="uid://by2jpy7nw5ess" path="res://lib/components/wander_component.tscn" id="3_fiq81"]
+[ext_resource type="PackedScene" uid="uid://dyimnjqivlost" path="res://lib/components/exit_component.tscn" id="4_l37oo"]
+[ext_resource type="PackedScene" uid="uid://dvwv8gy8lwsls" path="res://scenes/levels/level_1.tscn" id="5_qpwj6"]
+
+[node name="Level2" instance=ExtResource("1_j2425")]
+tile_map_data = PackedByteArray("AAAIAAgAAAAHAA8AAAAIAAkAAAAHAA8AAAAIAAoAAAAHAA8AAAAIAAsAAAAHAA8AAAAIAAwAAAAHAA8AAAAIAA0AAAAHAA8AAAAIAA4AAAAHAA8AAAAIAA8AAAAHAA8AAAAJAAgAAAAHAA8AAAAJAAkAAAAQAAAAAAAJAAoAAAAQAAAAAAAJAAsAAAAQAAAAAAAJAAwAAAAQAAAAAAAJAA0AAAAQAAAAAAAJAA4AAAAQAAAAAAAJAA8AAAAHAA8AAAAKAAgAAAAHAA8AAAAKAAkAAAAQAAAAAAAKAAoAAAAQAAAAAAAKAAsAAAAQAAAAAAAKAAwAAAAQAAAAAAAKAA0AAAAQAAAAAAAKAA4AAAAQAAAAAAAKAA8AAAAHAA8AAAALAAgAAAAHAA8AAAALAAkAAAAQAAAAAAALAAoAAAAQAAAAAAALAAsAAAAHAA8AAAALAAwAAAAHAA8AAAALAA0AAAAHAA8AAAALAA4AAAAHAA8AAAALAA8AAAAHAA8AAAAMAAgAAAAHAA8AAAAMAAkAAAAQAAAAAAAMAAoAAAAQAAAAAAAMAAsAAAAQAAAAAAAMAAwAAAAQAAAAAAAMAA0AAAAQAAAAAAAMAA4AAAAQAAAAAAAMAA8AAAAHAA8AAAANAAgAAAAHAA8AAAANAAkAAAAQAAAAAAANAAoAAAAQAAAAAAANAAsAAAAQAAAAAAANAAwAAAAQAAAAAAANAA0AAAAQAAAAAAANAA4AAAAQAAAAAAANAA8AAAAHAA8AAAAOAAgAAAAHAA8AAAAOAAkAAAAQAAAAAAAOAAoAAAAQAAAAAAAOAAsAAAAQAAAAAAAOAAwAAAAQAAAAAAAOAA0AAAAQAAAAAAAOAA4AAAAQAAAAAAAOAA8AAAAHAA8AAAAPAAgAAAAHAA8AAAAPAAkAAAAHAA8AAAAPAAoAAAAHAA8AAAAPAAsAAAAHAA8AAAAPAAwAAAAHAA8AAAAPAA0AAAAQAAAAAAAPAA4AAAAQAAAAAAAPAA8AAAAHAA8AAAAQAAgAAAAHAA8AAAAQAAkAAAAQAAAAAAAQAAoAAAAQAAAAAAAQAAsAAAAQAAAAAAAQAAwAAAAQAAAAAAAQAA0AAAAQAAAAAAAQAA4AAAAQAAAAAAAQAA8AAAAHAA8AAAARAAgAAAAHAA8AAAARAAkAAAAQAAAAAAARAAoAAAAQAAAAAAARAAsAAAAQAAAAAAARAAwAAAAQAAAAAAARAA0AAAAQAAAAAAARAA4AAAAQAAAAAAARAA8AAAAHAA8AAAASAAgAAAAHAA8AAAASAAkAAAAHAA8AAAASAAoAAAAHAA8AAAASAAsAAAAHAA8AAAASAAwAAAAHAA8AAAASAA0AAAAHAA8AAAASAA4AAAAHAA8AAAASAA8AAAAHAA8AAAA=")
+
+[node name="Batty" parent="." index="0" instance=ExtResource("2_ra442")]
+position = Vector2(208, 160)
+region_rect = Rect2(416, 128, 16, 16)
+
+[node name="WanderComponent" parent="Batty" index="0" instance=ExtResource("3_fiq81")]
+
+[node name="Batty2" parent="." index="1" instance=ExtResource("2_ra442")]
+position = Vector2(208, 208)
+region_rect = Rect2(416, 128, 16, 16)
+
+[node name="WanderComponent" parent="Batty2" index="0" instance=ExtResource("3_fiq81")]
+
+[node name="Crown" parent="." index="2" instance=ExtResource("2_ra442")]
+position = Vector2(144, 208)
+region_rect = Rect2(704, 32, 16, 16)
+
+[node name="Gold" parent="." index="3" instance=ExtResource("2_ra442")]
+position = Vector2(160, 224)
+region_rect = Rect2(656, 64, 16, 16)
+
+[node name="StairsUp" parent="." index="4" instance=ExtResource("2_ra442")]
+position = Vector2(272, 144)
+region_rect = Rect2(32, 96, 16, 16)
+
+[node name="ExitComponent" parent="StairsUp" index="0" instance=ExtResource("4_l37oo")]
+level_scene = ExtResource("5_qpwj6")

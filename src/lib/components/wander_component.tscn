@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://by2jpy7nw5ess"]
+
+[ext_resource type="Script" uid="uid://c46lqrh8s3hs8" path="res://lib/components/wander_component.gd" id="1_eb7bh"]
+
+[node name="WanderComponent" type="Node"]
+script = ExtResource("1_eb7bh")
+
+[node name="WanderTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="WanderTimer" to="." method="_on_wander_timer_timeout"]

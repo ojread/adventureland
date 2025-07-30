@@ -1,0 +1,7 @@
+join Sally left [animation="Slide In Up"]
+Sally: hello i am sally i'm a wizard can i join you
+- yes
+	update Sally [animation="Heartbeat"]
+	Sally: yay!
+- no
+	Sally: aww maybe next time

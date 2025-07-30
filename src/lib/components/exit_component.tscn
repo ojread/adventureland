@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dyimnjqivlost"]
+
+[ext_resource type="Script" uid="uid://bra6r5x7wh4rb" path="res://lib/components/exit_component.gd" id="1_5oovd"]
+
+[node name="ExitComponent" type="Node"]
+script = ExtResource("1_5oovd")
