@@ -12,6 +12,7 @@ func _ready() -> void:
 	load_level("res://scenes/levels/level_1.tscn")
 
 func _on_entity_clicked(entity: GridEntity) -> void:
+	print("Clicked ", entity.name)
 	if entity.name != "Player":
 		#var player = level.get_node("Player") as GridEntity
 		player.set_target_entity(entity)
@@ -41,6 +42,13 @@ func _on_level_clicked(cell: Vector2i) -> void:
 	player.set_target_grid(cell)
 
 func _on_entity_bumped(entity: GridEntity) -> void:
+	# Interact with the bumped entity.
+	print("Bumped ", entity.name)
+	var exit_component = entity.get_node("ExitComponent") as ExitComponent
+	if exit_component:
+		print(exit_component.level_path)
+		load_level(exit_component.level_path) 
+		player.place_at(exit_component.target_grid)
 	if entity.timeline.length() > 0 and not Dialogic.current_timeline:
 		Dialogic.start(entity.timeline)
 
@@ -61,6 +69,14 @@ func load_level(level_path: String) -> void:
 		player = level.get_node("Player")
 		player.reparent(new_level)
 		level.queue_free()
+	else:
+		player = load("res://lib/entities/player.tscn").instantiate()
+		new_level.add_child(player)
+		var player_spawn = new_level.get_node("PlayerSpawn")
+		if player_spawn:
+			player.place_at(player_spawn.grid)
 	level = new_level
 	player = level.get_node("Player")
+	# Need to place the player here, not include it in the level.
+	# Have a player spawn entity that gets used when starting the game.
 	

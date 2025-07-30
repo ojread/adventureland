@@ -48,3 +48,6 @@ func move_to(target: Vector2i) -> void:
 func place_at(grid_position: Vector2i):
 	grid = grid_position
 	position = grid * Globals.tile_size
+	var camera = get_node("Camera2D") as Camera2D
+	if camera:
+		camera.reset_smoothing()

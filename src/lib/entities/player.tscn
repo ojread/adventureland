@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://vaxmbsfwh64r"]
+
+[ext_resource type="PackedScene" uid="uid://bdd5dcwvio6q" path="res://lib/grid_entity/grid_entity.tscn" id="1_wuhxr"]
+
+[node name="Player" instance=ExtResource("1_wuhxr")]
+region_rect = Rect2(432, 0, 16, 16)
+
+[node name="Camera2D" type="Camera2D" parent="." index="0"]
+position_smoothing_enabled = true
